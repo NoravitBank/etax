@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Tax Web App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container-fluid {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .sidebar .position-sticky {
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar .nav {
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar .nav-item {
+      margin: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar .nav-link {
+      color: #555;
+      padding: 1rem 1.5rem;
+      border-radius: 0;
+      margin: 0;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border-left: 4px solid transparent;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .sidebar .nav-link:hover {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border-left-color: #fff;
+      text-decoration: none;
+    }
+
+    .sidebar .nav-link.active {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border-left-color: #fff;
+    }
+
+    .sidebar .nav-link i {
+      margin-right: 0.75rem;
+      width: 20px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 280px;
+      padding: 2rem;
+      flex: 1;
+    }
+
+    /* Cards and Containers */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card h1, .card h2 {
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .card h1 {
+      font-size: 2.5rem;
+      color: #667eea; /* Fallback color */
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      /* Fallback for browsers that don't support background-clip */
+      @supports not (-webkit-background-clip: text) {
+        background: none;
+        color: #667eea;
+      }
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Form Styling */
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .form-group input {
+      padding: 0.75rem;
+      border: 2px solid #e1e5e9;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      background: white;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+      color: white;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+    }
+
+    .btn-login {
+      background: linear-gradient(45deg, #f093fb, #f5576c);
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+    }
+
+    /* Table Styling */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e1e5e9;
+    }
+
+    th {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+
+    tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(102, 126, 234, 0.05);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-muted {
+      color: #888;
+      font-style: italic;
+    }
+
+    /* Radio buttons */
+    input[type="radio"] {
+      transform: scale(1.2);
+      accent-color: #667eea;
+    }
+
+    /* Pagination */
+    .paging {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .pagination {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .page-item .page-link {
+      padding: 0.75rem 1rem;
+      background: white;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 2px solid #e1e5e9;
+      transition: all 0.3s ease;
+    }
+
+    .page-item .page-link:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .page-item.active .page-link {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border-color: transparent;
+    }
+
+    .page-item.disabled .page-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Result Display */
+    .result-container {
+      background: linear-gradient(45deg, #a8edea, #fed6e3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border-left: 5px solid #56ab2f;
+    }
+
+    .result-container pre {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      color: #2d5a27;
+      font-family: 'Courier New', monospace;
+      line-height: 1.6;
+    }
+
+    .result-success {
+      color: #2d5a27;
+    }
+
+    .result-success h4 {
+      color: #56ab2f;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .result-error {
+      color: #721c24;
+    }
+
+    .result-error h4 {
+      color: #dc3545;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .result-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+    }
+
+    .result-item label {
+      font-weight: 600;
+      min-width: 120px;
+      color: #555;
+    }
+
+    .result-item span {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #2d5a27;
+      flex: 1;
+    }
+
+    .error-message {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid #dc3545;
+    }
+
+    .error-message p {
+      margin: 0;
+      color: #721c24;
+      font-weight: 500;
+    }
+
+    details {
+      margin-top: 1rem;
+    }
+
+    details summary {
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
+    details[open] summary {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .container-fluid {
+        flex-direction: column;
+      }
+
+      .search-form {
+        grid-template-columns: 1fr;
+      }
+
+      .card h1 {
+        font-size: 2rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success Badge */
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+    .logo-section {
+      border-bottom: 2px solid #eee;
+      margin-bottom: 1rem !important;
+    }
+
+    .badge-pending {
+      background: linear-gradient(45deg, #ff9a56, #ff6b35);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .badge-success {
+      background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .badge-error {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .btn-mini {
+      padding: 0.4rem 0.6rem;
+      border: none;
+      border-radius: 8px;
+      margin: 0 0.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .btn-view {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-edit {
+      background: linear-gradient(45deg, #ff9a56, #ff6b35);
+      color: white;
+    }
+
+    .btn-download {
+      background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+      color: white;
+    }
+
+    .btn-retry {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+    }
+
+    .btn-mini:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <nav class="sidebar">
+    <div class="position-sticky">
+      <!-- Logo Section -->
+      <div class="logo-section text-center mb-4 p-3">
+        <div class="logo-icon">
+          <i class="fa-solid fa-calculator-simple fa-3x" style="color: #667eea;"></i>
+        </div>
+        <h4 style="color: #333; margin-top: 1rem; font-weight: 600;">e-Tax System</h4>
+        <p style="color: #888; font-size: 0.9rem;">ระบบภาษีอิเล็กทรอนิกส์</p>
+      </div>
+      
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link active" href="/etax">
+            <i class="fa-solid fa-file-invoice-dollar"></i> รายการใบขาย
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-cloud-arrow-up"></i> นำส่ง e-Tax
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-chart-line"></i> รายงานสถิติ
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-file-circle-check"></i> ประวัติการส่ง
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-download"></i> ดาวน์โหลดไฟล์
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-cogs"></i> ตั้งค่าระบบ
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-user-circle"></i> โปรไฟล์
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-question-circle"></i> ช่วยเหลือ
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="#" style="border-top: 1px solid #eee; margin-top: 1rem; padding-top: 1rem;">
+            <i class="fa-solid fa-sign-out-alt"></i> ออกจากระบบ
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="card">
+     
+      <h1><i class="fa-solid fa-file-contract"></i> ระบบจัดการ e-Tax</h1>
+      
+      <form action="/etax/fetch" method="POST" class="search-form">
+        <div class="form-group">
+          <label><i class="fa-solid fa-calendar-plus"></i> วันที่เริ่มต้น</label>
+          <input type="date" name="dateFrom">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-calendar-check"></i> ถึงวันที่</label>
+          <input type="date" name="dateTo">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-receipt"></i> เลขที่ใบขายเริ่ม</label>
+          <input type="text" name="invoiceFrom" placeholder="เช่น INV001">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-receipt"></i> ถึงเลขที่</label>
+          <input type="text" name="invoiceTo" placeholder="เช่น INV999">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-search-plus"></i> ค้นหาข้อมูล
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2><i class="fa-solid fa-table-list"></i> รายการใบขาย</h2>
+      <form action="/etax/submit" method="POST">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th><i class="fa-solid fa-circle-check"></i> เลือก</th>
+                <th><i class="fa-solid fa-barcode"></i> เลขที่ใบขาย</th>
+                <th><i class="fa-solid fa-calendar-day"></i> วันที่ออกใบขาย</th>
+                <th><i class="fa-solid fa-building"></i> ชื่อลูกค้า</th>
+                <th><i class="fa-solid fa-coins"></i> ยอดรวมสุทธิ</th>
+                <th><i class="fa-solid fa-info-circle"></i> สถานะ</th>
+                <th><i class="fa-solid fa-tools"></i> จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (Array.isArray(invoices) && invoices.length) { %>
+                <% invoices.forEach(function(inv) { %>
+                  <tr>
+                    <td><input type="radio" name="invoiceId" value="<%= inv.SALES_INVOICE_ID %>"></td>
+                    <td><i class="fa-solid fa-file-invoice"></i> <%= inv.SALES_INVOICE_NO %></td>
+                    <td><i class="fa-solid fa-calendar"></i> <%= inv.SALES_INVOICE_DATE %></td>
+                    <td><i class="fa-solid fa-building-user"></i> <%= inv.CUSTOMER_FULLNAME %></td>
+                    <td><i class="fa-solid fa-baht-sign"></i> <%= inv.GRAND_TOTAL_FC %></td>
+                    <td><span class="badge-pending"><i class="fa-solid fa-clock"></i> รอส่ง</span></td>
+                    <td>
+                      <button class="btn-mini btn-view" type="button"><i class="fa-solid fa-eye"></i></button>
+                      <button class="btn-mini btn-edit" type="button"><i class="fa-solid fa-edit"></i></button>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr>
+                  <td colspan="7" class="text-center text-muted">
+                    <i class="fa-solid fa-inbox"></i> ไม่พบข้อมูลใบขาย
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        <button type="submit" class="btn btn-success" style="margin-top: 1rem;">
+          <i class="fa-solid fa-rocket"></i> ส่งข้อมูล e-Tax
+        </button>
+      </form>
+
+      <!-- Pagination -->
+      <div class="paging">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <% if (page > 1) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page - 1 %>"><i class="fa-solid fa-chevron-left"></i></a>
+              </li>
+            <% } else { %>
+              <li class="page-item disabled">
+                <span class="page-link"><i class="fa-solid fa-chevron-left"></i></span>
+              </li>
+            <% } %>
+            <% for (let i = 1; i <= totalPages; i++) { %>
+              <li class="page-item <%= page === i ? 'active' : '' %>">
+                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+            <% if (page < totalPages) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page + 1 %>"><i class="fa-solid fa-chevron-right"></i></a>
+              </li>
+            <% } else { %>
+              <li class="page-item disabled">
+                <span class="page-link"><i class="fa-solid fa-chevron-right"></i></span>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <% if (result) { %>
+      <div class="card">
+        <h2>
+          <i class="fa-solid fa-chart-pie"></i> ผลการนำส่ง e-Tax 
+          <% if (result.success === true || result.status === 'OK' || (result.data && result.data.status === 'OK')) { %>
+            <span class="status-badge badge-success"><i class="fa-solid fa-thumbs-up"></i> สำเร็จ</span>
+          <% } else { %>
+            <span class="status-badge badge-error"><i class="fa-solid fa-exclamation-triangle"></i> ล้มเหลว</span>
+          <% } %>
+        </h2>
+        <div class="result-container">
+          <% if (result.success === true || result.status === 'OK' || (result.data && result.data.status === 'OK')) { %>
+            <div class="result-success">
+              <h4><i class="fa-solid fa-check-circle"></i> การส่งข้อมูลสำเร็จ</h4>
+              <div class="result-details">
+                <% 
+                  // ดึงข้อมูลจาก result.data หรือ result โดยตรง
+                  const data = result.data || result;
+                  const transactionCode = data.transactionCode || data.transaction_code;
+                  const pdfURL = data.pdfURL || data.pdf_url;
+                  const xmlURL = data.xmlURL || data.xml_url;
+                %>
+                <% if (transactionCode) { %>
+                  <div class="result-item">
+                    <label><i class="fa-solid fa-barcode"></i> Transaction Code:</label>
+                    <span><%= transactionCode %></span>
+                  </div>
+                <% } %>
+                <% if (pdfURL) { %>
+                  <div class="result-item">
+                    <label><i class="fa-solid fa-file-pdf"></i> ไฟล์ PDF:</label>
+                    <a href="<%= pdfURL %>" target="_blank" class="btn btn-mini btn-download">
+                      <i class="fa-solid fa-download"></i> ดาวน์โหลด PDF
+                    </a>
+                  </div>
+                <% } %>
+                <% if (xmlURL) { %>
+                  <div class="result-item">
+                    <label><i class="fa-solid fa-file-code"></i> ไฟล์ XML:</label>
+                    <a href="<%= xmlURL %>" target="_blank" class="btn btn-mini btn-download">
+                      <i class="fa-solid fa-download"></i> ดาวน์โหลด XML
+                    </a>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="result-error">
+              <h4><i class="fa-solid fa-times-circle"></i> เกิดข้อผิดพลาด</h4>
+              <div class="error-message">
+                <p><%= result.message || result.error || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' %></p>
+                <% if (result.error_details) { %>
+                  <details>
+                    <summary>รายละเอียดข้อผิดพลาด</summary>
+                    <pre><%= JSON.stringify(result.error_details, null, 2) %></pre>
+                  </details>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+          
+          <!-- Raw JSON Response (for debugging) -->
+          <details style="margin-top: 1rem;">
+            <summary style="cursor: pointer; color: #666;">
+              <i class="fa-solid fa-code"></i> Raw Response (สำหรับ Debug)
+            </summary>
+            <pre style="margin-top: 0.5rem;"><%= JSON.stringify(result, null, 2) %></pre>
+          </details>
+        </div>
+      </div>
+    <% } %>
+  </main>
+</div>
+
+<script>
+// Add some interactive features
+document.addEventListener('DOMContentLoaded', function() {
+  // Add loading state to buttons
+  const buttons = document.querySelectorAll('button[type="submit"]');
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const icon = this.querySelector('i');
+      const originalClass = icon.className;
+      icon.className = 'loading';
+      
+      setTimeout(() => {
+        icon.className = originalClass;
+      }, 2000);
+    });
+  });
+
+  // Highlight selected table row
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', function() {
+      // Remove highlight from all rows
+      document.querySelectorAll('tbody tr').forEach(row => {
+        row.style.background = '';
+      });
+      
+      // Highlight selected row
+      if (this.checked) {
+        this.closest('tr').style.background = 'rgba(102, 126, 234, 0.1)';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

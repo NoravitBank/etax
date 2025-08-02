@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "adc4dfca-7812-48f4-8d89-16fd0b149738",
+		"name": "E-Tax",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21269685",
+		"_collection_link": "https://martian-shadow-785456.postman.co/workspace/POS-FOOD~0bd169fd-85c3-4889-89c9-430208f50dd4/collection/21269685-adc4dfca-7812-48f4-8d89-16fd0b149738?action=share&source=collection_link&creator=21269685"
+	},
+	"item": [
+		{
+			"name": "etax_signdocument Full",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "MjY6cno2a2lKeGE2Q3JXOFNUcEYzcHlmZW0wN29LRDl3cUxKUTFjV3ZZOTpleUowWVhocFpDSTZJakF4TURVMU1qZ3dNVEF3T0RraUxDSndZWE56ZDI5eVpDSTZJa0Z0ZDJGNUl6RXlNelFpZlE0RVlKV0tpRTlwVHlRcVpZODBlSGZwU01GRlJ1SnFMeQ==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SellerTaxId\": \"0105565034824\",\r\n  \"SellerBranchId\": \"00000\",\r\n  \"APIKey\": \"AK23UY8R84Q6LIZ5A18IDZH6JI3O63IZLJLJH01CS1OUHRTWR5VG4AED7UCTA5HKE92JJLN1R1DZT74WCDN9PI4L4JM7B62ULRNQTHJ4EO85IYUELWWVG5R7EX8AHQNQY8YNW21Y8Q5EE46P0GQUEOFY700LLOCIBOLRXG0ZVY3J9IUWQOTYBB9TJ85DKSIU8E93MIF8NQ89HRYGGNI4U7K69DZQ9H0EGG0YC2Z09O90J77COR0HCQK9W9SALBWE3E6I\",\r\n  \"UserCode\": \"tebutest\",\r\n  \"AccessKey\": \"P@ssw0rd\",\r\n  \"ServiceCode\": \"S03\",\r\n  \"TextContent\": {\r\n    \"C01-SELLER_TAX_ID\": \"0105565034824\",\r\n    \"C02-SELLER_BRANCH_ID\": \"00000\",\r\n    \"C03-FILE_NAME\": \"0105547135401.txt\",\r\n    \"H01-DOCUMENT_TYPE_CODE\": \"T01\",\r\n    \"H02-DOCUMENT_NAME\": \"ใบเสร็จรับเงิน\",\r\n    \"H03-DOCUMENT_ID\": \"TEST-RD-01\",\r\n    \"H04-DOCUMENT_ISSUE_DTM\": \"2025-04-24T08:21:59\",\r\n    \"H05-CREATE_PURPOSE_CODE\": \"\",\r\n    \"H06-CREATE_PURPOSE\": \"\",\r\n    \"H07-ADDITIONAL_REF_ASSIGN_ID\": \"\",\r\n    \"H08-ADDITIONAL_REF_ISSUE_DTM\": \"\",\r\n    \"H09-ADDITIONAL_REF_TYPE_CODE\": \"\",\r\n    \"H10-ADDITIONAL_REF_DOCUMENT_NAME\": \"\",\r\n    \"H11-DELIVERY_TYPE_CODE\": \"\",\r\n    \"H12-BUYER_ORDER_ASSIGN_ID\": \"\",\r\n    \"H13-BUYER_ORDER_ISSUE_DTM\": \"\",\r\n    \"H14-BUYER_ORDER_REF_TYPE_CODE\": \"\",\r\n    \"H15-DOCUMENT_REMARK\": \"\",\r\n    \"H16-VOUCHER_NO\": \"\",\r\n    \"H17-SELLER_CONTACT_PERSON_NAME\": \"\",\r\n    \"H18-SELLER_CONTACT_DEPARTMENT_NAME\": \"\",\r\n    \"H19-SELLER_CONTACT_URIID\": \"\",\r\n    \"H20-SELLER_CONTACT_PHONE_NO\": \"\",\r\n    \"H21-FLEX_FIELD\": \"\",\r\n    \"H22-SELLER_BRANCH_ID\": \"\",\r\n    \"H23-SOURCE_SYSTEM\": \"\",\r\n    \"H24-ENCRYPT_PASSWORD\": \"\",\r\n    \"H25-PDF_TEMPLATE_ID\": \"\",\r\n    \"H26-SEND_MAIL_IND\": \"N\",\r\n    \"H27-PDF_NAME\": \"\",\r\n    \"B01-BUYER_ID\": \"\",\r\n    \"B02-BUYER_NAME\": \"บริษัท ทดสอบ จำกัด\",\r\n    \"B03-BUYER_TAX_ID_TYPE\": \"OTHR\",\r\n    \"B04-BUYER_TAX_ID\": \"N/A\",\r\n    \"B05-BUYER_BRANCH_ID\": \"\",\r\n    \"B06-BUYER_CONTACT_PERSON_NAME\": \"\",\r\n    \"B07-BUYER_CONTACT_DEPARTMENT_NAME\": \"\",\r\n    \"B08-BUYER_URIID\": \"\",\r\n    \"B09-BUYER_CONTACT_PHONE_NO\": \"\",\r\n    \"B10-BUYER_POST_CODE\": \"10250\",\r\n    \"B11-BUYER_BUILDING_NAME\": \"\",\r\n    \"B12-BUYER_BUILDING_NO\": \"\",\r\n    \"B13-BUYER_ADDRESS_LINE1\": \"\",\r\n    \"B14-BUYER_ADDRESS_LINE2\": \"\",\r\n    \"B15-BUYER_ADDRESS_LINE3\": \"\",\r\n    \"B16-BUYER_ADDRESS_LINE4\": \"\",\r\n    \"B17-BUYER_ADDRESS_LINE5\": \"\",\r\n    \"B18-BUYER_STREET_NAME\": \"\",\r\n    \"B19-BUYER_CITY_SUB_DIV_ID\": \"\",\r\n    \"B20-BUYER_CITY_SUB_DIV_NAME\": \"\",\r\n    \"B21-BUYER_CITY_ID\": \"\",\r\n    \"B22-BUYER_CITY_NAME\": \"\",\r\n    \"B23-BUYER_COUNTRY_SUB_DIV_ID\": \"\",\r\n    \"B24-BUYER_COUNTRY_SUB_DIV_NAME\": \"\",\r\n    \"B25-BUYER_COUNTRY_ID\": \"TH\",\r\n    \"O01-SHIP_TO_ID\": \"\",\r\n    \"O02-SHIP_TO_NAME\": \"\",\r\n    \"O03-SHIP_TO_TAX_ID_TYPE\": \"\",\r\n    \"O04-SHIP_TO_TAX_ID\": \"\",\r\n    \"O05-SHIP_TO_BRANCH_ID\": \"\",\r\n    \"O06-SHIP_TO_CONTACT_PERSON_NAME\": \"\",\r\n    \"O07-SHIP_TO_CONTACT_DEPARTMENT_NAME\": \"\",\r\n    \"O08-SHIP_TO_URIID\": \"\",\r\n    \"O09-SHIP_TO_PHONE_NO\": \"\",\r\n    \"O10-SHIP_TO_POST_CODE\": \"\",\r\n    \"O11-SHIP_TO_BUILDING_NAME\": \"\",\r\n    \"O12-SHIP_TO_BUILDING_NO\": \"\",\r\n    \"O13-SHIP_TO_ADDRESS_LINE1\": \"\",\r\n    \"O14-SHIP_TO_ADDRESS_LINE2\": \"\",\r\n    \"O15-SHIP_TO_ADDRESS_LINE3\": \"\",\r\n    \"O16-SHIP_TO_ADDRESS_LINE4\": \"\",\r\n    \"O17-SHIP_TO_ADDRESS_LINE5\": \"\",\r\n    \"O18-SHIP_TO_STREET_NAME\": \"\",\r\n    \"O19-SHIP_TO_CITY_SUB_DIV_ID\": \"\",\r\n    \"O20-SHIP_TO_CITY_SUB_DIV_NAME\": \"\",\r\n    \"O21-SHIP_TO_CITY_ID\": \"\",\r\n    \"O22-SHIP_TO_CITY_NAME\": \"\",\r\n    \"O23-SHIP_TO_COUNTRY_SUB_DIV_ID\": \"\",\r\n    \"O24-SHIP_TO_COUNTRY_SUB_DIV_NAME\": \"\",\r\n    \"O25-SHIP_TO_COUNTRY_ID\": \"\",\r\n    \"LINE_ITEM_INFORMATION\": [\r\n      {\r\n        \"L01-LINE_ID\": \"1\",\r\n        \"L02-PRODUCT_ID\": \"OD-001\",\r\n        \"L03-PRODUCT_NAME\": \"สินค้า\",\r\n        \"L04-PRODUCT_DESC\": \"\",\r\n        \"L05-PRODUCT_BATCH_ID\": \"\",\r\n        \"L06-PRODUCT_EXPIRE_DTM\": \"\",\r\n        \"L07-PRODUCT_CLASS_CODE\": \"\",\r\n        \"L08-PRODUCT_CLASS_NAME\": \"\",\r\n        \"L09-PRODUCT_ORIGIN_COUNTRY_ID\": \"\",\r\n        \"L10-PRODUCT_CHARGE_AMOUNT\": \"1000\",\r\n        \"L11-PRODUCT_CHARGE_CURRENCY_CODE\": \"THB\",\r\n        \"L12-PRODUCT_ALLOWANCE_CHARGE_IND\": \"true\",\r\n        \"L13-PRODUCT_ALLOWANCE_ACTUAL_AMOUNT\": \"\",\r\n        \"L14-PRODUCT_ALLOWANCE_ACTUAL_CURRENCY_CODE\": \"THB\",\r\n        \"L15-PRODUCT_ALLOWANCE_REASON_CODE\": \"\",\r\n        \"L16-PRODUCT_ALLOWANCE_REASON\": \"\",\r\n        \"L17-PRODUCT_QUANTITY\": \"1\",\r\n        \"L18-PRODUCT_UNIT_CODE\": \"\",\r\n        \"L19-PRODUCT_QUANTITY_PER_UNIT\": \"\",\r\n        \"L20-LINE_TAX_TYPE_CODE\": \"VAT\",\r\n        \"L21-LINE_TAX_CAL_RATE\": \"7.00\",\r\n        \"L22-LINE_BASIS_AMOUNT\": \"\",\r\n        \"L23-LINE_BASIS_CURRENCY_CODE\": \"\",\r\n        \"L24-LINE_TAX_CAL_AMOUNT\": \"\",\r\n        \"L25-LINE_TAX_CAL_CURRENCY_CODE\": \"\",\r\n        \"L26-LINE_ALLOWANCE_CHARGE_IND\": \"\",\r\n        \"L27-LINE_ALLOWANCE_ACTUAL_AMOUNT\": \"\",\r\n        \"L28-LINE_ALLOWANCE_ACTUAL_CURRENCY_CODE\": \"\",\r\n        \"L29-LINE_ALLOWANCE_REASON_CODE\": \"\",\r\n        \"L30-LINE_ALLOWANCE_REASON\": \"\",\r\n        \"L31-LINE_TAX_TOTAL_AMOUNT\": \"1000.00\",\r\n        \"L32-LINE_TAX_TOTAL_CURRENCY_CODE\": \"\",\r\n        \"L33-LINE_NET_TOTAL_AMOUNT\": \"1000.00\",\r\n        \"L34-LINE_NET_TOTAL_CURRENCY_CODE\": \"\",\r\n        \"L35-LINE_NET_INCLUDE_TAX_TOTAL_AMOUNT\": \"1000.00\",\r\n        \"L36-LINE_NET_INCLUDE_TAX_TOTAL_CURRENCY_CODE\": \"\",\r\n        \"L37-PRODUCT_REMARK1\": \"\",\r\n        \"L38-PRODUCT_REMARK2\": \"\",\r\n        \"L39-PRODUCT_REMARK3\": \"\",\r\n        \"L40-PRODUCT_REMARK4\": \"\",\r\n        \"L41-PRODUCT_REMARK5\": \"\",\r\n        \"L42-PRODUCT_REMARK6\": \"\",\r\n        \"L43-PRODUCT_REMARK7\": \"\",\r\n        \"L44-PRODUCT_REMARK8\": \"\",\r\n        \"L45-PRODUCT_REMARK9\": \"\",\r\n        \"L46-PRODUCT_REMARK10\": \"\"\r\n      }\r\n    ],\r\n    \"F01-LINE_TOTAL_COUNT\": \"10\",\r\n    \"F02-DELIVERY_OCCUR_DTM\": \"\",\r\n    \"F03-INVOICE_CURRENCY_CODE\": \"\",\r\n    \"F04-TAX_TYPE_CODE1\": \"\",\r\n    \"F05-TAX_CAL_RATE1\": \"\",\r\n    \"F06-BASIS_AMOUNT1\": \"\",\r\n    \"F07-BASIS_CURRENCY_CODE1\": \"\",\r\n    \"F08-TAX_CAL_AMOUNT1\": \"\",\r\n    \"F09-TAX_CAL_CURRENCY_CODE1\": \"\",\r\n    \"F10-TAX_TYPE_CODE2\": \"\",\r\n    \"F11-TAX_CAL_RATE2\": \"\",\r\n    \"F12-BASIS_AMOUNT2\": \"\",\r\n    \"F13-BASIS_CURRENCY_CODE2\": \"\",\r\n    \"F14-TAX_CAL_AMOUNT2\": \"\",\r\n    \"F15-TAX_CAL_CURRENCY_CODE2\": \"\",\r\n    \"F16-TAX_TYPE_CODE3\": \"\",\r\n    \"F17-TAX_CAL_RATE3\": \"\",\r\n    \"F18-BASIS_AMOUNT3\": \"\",\r\n    \"F19-BASIS_CURRENCY_CODE3\": \"\",\r\n    \"F20-TAX_CAL_AMOUNT3\": \"\",\r\n    \"F21-TAX_CAL_CURRENCY_CODE3\": \"\",\r\n    \"F22-TAX_TYPE_CODE4\": \"\",\r\n    \"F23-TAX_CAL_RATE4\": \"\",\r\n    \"F24-BASIS_AMOUNT4\": \"\",\r\n    \"F25-BASIS_CURRENCY_CODE4\": \"\",\r\n    \"F26-TAX_CAL_AMOUNT4\": \"\",\r\n    \"F27-TAX_CAL_CURRENCY_CODE4\": \"\",\r\n    \"F28-ALLOWANCE_CHARGE_IND\": \"\",\r\n    \"F29-ALLOWANCE_ACTUAL_AMOUNT\": \"\",\r\n    \"F30-ALLOWANCE_ACTUAL_CURRENCY_CODE\": \"\",\r\n    \"F31-ALLOWANCE_REASON_CODE\": \"\",\r\n    \"F32-ALLOWANCE_REASON\": \"1000\",\r\n    \"F33-PAYMENT_TYPE_CODE\": \"THB\",\r\n    \"F34-PAYMENT_DESCRIPTION\": \"\",\r\n    \"F35-PAYMENT_DUE_DTM\": \"\",\r\n    \"F36-ORIGINAL_TOTAL_AMOUNT\": \"\",\r\n    \"F37-ORIGINAL_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F38-LINE_TOTAL_AMOUNT\": \"\",\r\n    \"F39-LINE_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F40-ADJUSTED_INFORMATION_AMOUNT\": \"\",\r\n    \"F41-ADJUSTED_INFORMATION_CURRENCY_CODE\": \"\",\r\n    \"F42-ALLOWANCE_TOTAL_AMOUNT\": \"\",\r\n    \"F43-ALLOWANCE_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F44-CHARGE_TOTAL_AMOUNT\": \"\",\r\n    \"F45-CHARGE_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F46-TAX_BASIS_TOTAL_AMOUNT\": \"\",\r\n    \"F47-TAX_BASIS_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F48-TAX_TOTAL_AMOUNT\": \"\",\r\n    \"F49-TAX_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F50-GRAND_TOTAL_AMOUNT\": \"1,000.00\",\r\n    \"F51-GRAND_TOTAL_CURRENCY_CODE\": \"\",\r\n    \"F52-TERM_PAYMENT\": \"\",\r\n    \"F53-WITHHOLDINGTAX_TYPE1\": \"\",\r\n    \"F54-WITHHOLDINGTAX_DESCRIPTION1\": \"\",\r\n    \"F55-WITHHOLDINGTAX_RATE1\": \"\",\r\n    \"F56-WITHHOLDINGTAX_BASIS_AMOUNT1\": \"\",\r\n    \"F57-WITHHOLDINGTAX_TAX_AMOUNT1\": \"\",\r\n    \"F58-WITHHOLDINGTAX_TYPE2\": \"\",\r\n    \"F59-WITHHOLDINGTAX_DESCRIPTION2\": \"\",\r\n    \"F60-WITHHOLDINGTAX_RATE2\": \"\",\r\n    \"F61-WITHHOLDINGTAX_BASIS_AMOUNT2\": \"\",\r\n    \"F62-WITHHOLDINGTAX_TAX_AMOUNT2\": \"\",\r\n    \"F63-WITHHOLDINGTAX_TYPE3\": \"\",\r\n    \"F64-WITHHOLDINGTAX_DESCRIPTION3\": \"\",\r\n    \"F65-WITHHOLDINGTAX_RATE3\": \"\",\r\n    \"F66-WITHHOLDINGTAX_BASIS_AMOUNT3\": \"\",\r\n    \"F67-WITHHOLDINGTAX_TAX_AMOUNT3\": \"\",\r\n    \"F68-WITHHOLDINGTAX_TOTAL_AMOUNT\": \"\",\r\n    \"F69-ACTUAL_PAYMENT_TOTAL_AMOUNT\": \"\",\r\n    \"F70-DOCUMENT_REMARK1\": \"\",\r\n    \"F71-DOCUMENT_REMARK2\": \"\",\r\n    \"F72-DOCUMENT_REMARK3\": \"\",\r\n    \"F73-DOCUMENT_REMARK4\": \"\",\r\n    \"F74-DOCUMENT_REMARK5\": \"\",\r\n    \"F75-DOCUMENT_REMARK6\": \"\",\r\n    \"F76-DOCUMENT_REMARK7\": \"\",\r\n    \"F77-DOCUMENT_REMARK8\": \"\",\r\n    \"F78-DOCUMENT_REMARK9\": \"\",\r\n    \"F79-DOCUMENT_REMARK10\": \"\",\r\n    \"T01-TOTAL_DOCUMENT_COUNT\": \"1\"\r\n  },\r\n  \"PDFContent\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://uatservice-etax.one.th/etaxjsonws/etaxsigndocument"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "Mjc6R29DY1JvRlA5RGc5QUhlNWh6aU15MUxvRHFwM1RJNXpTVTVrVUVTRTpleUowWVhocFpDSTZJakF4TURVMU5qVXdNelE0TWpRaUxDSndZWE56ZDI5eVpDSTZJblJsWW5WQVVHRnpjekF4SW4wWEQ3Z0VIbnk4RUtEYU1mYnV3cHJyRVpFcklSUFZxc1Q=",
+			"type": "string"
+		}
+	]
+}

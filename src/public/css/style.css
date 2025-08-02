@@ -1,0 +1,105 @@
+/* Enhanced CSS for e-Tax Application */
+/* Colors from design system */
+:root {
+  --warm-white: #FFFDF7;
+  --coffee-brown: #A67C52;
+  --cream-beige: #F4EBD0;
+  --charcoal-gray: #3B3B3B;
+  --soft-caramel: #C89F75;
+}
+
+/* Global optimizations for performance */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Prompt', 'Kanit', 'Sarabun', sans-serif;
+  background: var(--warm-white);
+  color: var(--charcoal-gray);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography enhancements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--coffee-brown);
+  font-weight: 500;
+}
+
+/* Form enhancements */
+.form-control {
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.1);
+}
+
+/* Button enhancements */
+.btn {
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.2);
+}
+
+/* Table enhancements */
+.table {
+  font-family: inherit;
+}
+
+.table th {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+/* Performance optimizations */
+.card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.btn {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .sidebar,
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+}
