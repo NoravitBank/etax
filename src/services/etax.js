@@ -1,4 +1,5 @@
 const axios = require('axios');
+const supabase = require('./supabase');
 
 // แปลงข้อมูลใบขายจาก ERP เป็น payload สำหรับ e-tax
 exports.transformInvoice = (invoice) => {
@@ -225,7 +226,8 @@ exports.transformInvoice = (invoice) => {
 };
 
 // ส่งข้อมูลไปยัง e-tax API
-exports.submitToEtax = async (payload) => {
+// ส่งข้อมูลไปยัง e-tax API และบันทึก log ลง Supabase
+exports.submitToEtax = async (payload, salesInvoiceNo) => {
   try {
     const response = await axios.post(
       "https://uatservice-etax.one.th/etaxjsonws/etaxsigndocument",
@@ -237,8 +239,47 @@ exports.submitToEtax = async (payload) => {
         }
       }
     );
+    // log ลง Supabase
+    // ทำให้ robust: handle กรณี field หายหรือชื่อไม่ตรง
+    const dataObj = response.data;
+    const pdf_url = dataObj.pdfURL || dataObj.pdfUrl || null;
+    const xml_url = dataObj.xmlURL || dataObj.xmlUrl || null;
+    const status = dataObj.status || null;
+    const transaction_code = dataObj.transactionCode || dataObj.transaction_code || null;
+    await supabase.from('etax_logs').insert([
+      {
+        sales_invoice_no: salesInvoiceNo,
+        pdf_url,
+        xml_url,
+        status,
+        transaction_code,
+        response_data: response.data,
+        created_at: new Date().toISOString()
+      }
+    ]);
     return { success: true, data: response.data };
   } catch (error) {
+    // log error ลง Supabase เช่นกัน
+    let errorData = error.response ? error.response.data : { message: error.message };
+    let pdf_url = null, xml_url = null, status = null, transaction_code = null;
+    if (errorData && errorData.data) {
+      pdf_url = errorData.data.pdfURL || errorData.data.pdfUrl || null;
+      xml_url = errorData.data.xmlURL || errorData.data.xmlUrl || null;
+      status = errorData.data.status || null;
+      transaction_code = errorData.data.transactionCode || errorData.data.transaction_code || null;
+    }
+    await supabase.from('etax_logs').insert([
+      {
+        sales_invoice_no: salesInvoiceNo,
+        pdf_url,
+        xml_url,
+        status,
+        transaction_code,
+        response_data: errorData,
+        created_at: new Date().toISOString()
+      }
+    ]);
     return { success: false, error: error.response ? error.response.data : error.message };
   }
 };
+

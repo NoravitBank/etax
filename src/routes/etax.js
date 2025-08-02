@@ -53,9 +53,8 @@ router.post('/fetch', async (req, res) => {
 router.post('/submit', async (req, res) => {
   const { invoiceId } = req.body;
   const invoice = await erp.getInvoiceById(invoiceId);
-  console.log(invoice);
   const etaxPayload = etax.transformInvoice(invoice);
-  const result = await etax.submitToEtax(etaxPayload);
+  const result = await etax.submitToEtax(etaxPayload, invoice.SALES_INVOICE_NO);
   res.render('etax/index', { invoices: [invoice], result, page: 1, totalPages: 1 });
 });
 
